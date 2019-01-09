@@ -51,8 +51,10 @@ sudo chmod +x $XAMPP_INSTALLER_FILE
 
 echo ""
 echo "------> Running installer..."
-sudo ./$XAMPP_INSTALLER_FILE
+nohup sudo ./$XAMPP_INSTALLER_FILE &
+
+wait
 
 echo ""
 echo "------> Creating launcher..."
-echo -e ‘[Desktop Entry]\n Version=1.0\n Name=xampp\n Exec=pkexec /opt/lampp/manager-linux-x64.run\n Icon=/opt/lampp/icons/world1.png\n Type=Application\n Categories=Application’ | sudo tee /usr/share/applications/xampp.desktop
+echo "[Desktop Entry]\n Version=1.0\n Name=xampp\n Exec=pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/manager-linux-x64.run\n Icon=/opt/lampp/htdocs/favicon.ico\n Type=Application\n Categories=Application" | sudo tee /usr/share/applications/xampp.desktop
